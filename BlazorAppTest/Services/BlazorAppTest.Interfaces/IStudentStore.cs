@@ -5,13 +5,13 @@ using BlazorAppTest.Domain.Entities;
 
 namespace BlazorAppTest.Interfaces
 {
-    public interface IStudentManager
+    public interface IStudentStore
     {
         IAsyncEnumerable<Student> Get(CancellationToken Cancel = default);
 
-        Task<Student> GetById(int Id, CancellationToken Cancel = default);
+        Task<Student> Get(int Id, CancellationToken Cancel = default);
 
-        Task<Student> GetByName(string Surname, string Name, string Patronymic, CancellationToken Cancel = default);
+        Task<Student> Get(string Surname, string Name, string Patronymic = null, CancellationToken Cancel = default);
 
         Task<int> Add(Student student, CancellationToken Cancel = default);
 

@@ -9,17 +9,17 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BlazorAppTest.Services
 {
-    public class StudentsManager : IStudentManager
+    public class StudentsStore : IStudentStore
     {
         private readonly BlazorAppDB _db;
 
-        public StudentsManager(BlazorAppDB db) => _db = db;
+        public StudentsStore(BlazorAppDB db) => _db = db;
 
         public IAsyncEnumerable<Student> Get(CancellationToken Cancel = default) => _db.Students;
 
-        public Task<Student> GetById(int Id, CancellationToken Cancel = default) => _db.Students.FirstOrDefaultAsync(s => s.Id == Id, Cancel);
+        public Task<Student> Get(int Id, CancellationToken Cancel = default) => _db.Students.FirstOrDefaultAsync(s => s.Id == Id, Cancel);
 
-        public Task<Student> GetByName(string Surname, string Name, string Patronymic = null, CancellationToken Cancel = default) =>
+        public Task<Student> Get(string Surname, string Name, string Patronymic = null, CancellationToken Cancel = default) =>
             string.IsNullOrEmpty(Patronymic)
                 ? _db.Students.FirstOrDefaultAsync(s => s.Surname == Surname && s.Name == Name, Cancel)
                 : _db.Students.FirstOrDefaultAsync(s => s.Surname == Surname && s.Name == Name && s.Patronymic == Patronymic, Cancel);

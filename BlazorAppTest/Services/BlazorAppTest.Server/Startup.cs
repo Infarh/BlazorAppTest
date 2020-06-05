@@ -21,7 +21,7 @@ namespace BlazorAppTest.Server
             services.AddDbContext<BlazorAppDB>(opt => opt.UseSqlServer(Configuration.GetConnectionString("Default")));
             services.AddTransient<BlazorAppDBInitializer>();
 
-            services.AddScoped<IStudentManager, StudentsManager>();
+            services.AddScoped<IStudentStore, StudentsStore>();
 
             services.AddControllersWithViews();
             services.AddRazorPages();
