@@ -1,0 +1,48 @@
+﻿@page "/Students"
+@using BlazorAppTest.Domain.Entities
+@inject HttpClient Server
+
+<h2>Студенты</h2>
+<hr />
+
+@if (_Students is null)
+{
+    <p>Загрузка данных...</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+        <tr>
+            <th>№</th>
+            <th>Фамилия</th>
+            <th>Имя</th>
+            <th>Отчество</th>
+            <th>Дата рождения</th>
+        </tr>
+        </thead>
+        <tbody>
+            @foreach (var student in _Students)
+            {
+                <tr>
+                    <td>@student.Id</td>
+                    <td>@student.Surname</td>
+                    <td>@student.Name</td>
+                    <td>@student.Patronymic</td>
+                    <td>@student.Birthday.ToString("d")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+@code {
+    private Student[] _Students;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _Students = await Server.GetFromJsonAsync<Student[]>("api/Students");
+    }
+
+}
