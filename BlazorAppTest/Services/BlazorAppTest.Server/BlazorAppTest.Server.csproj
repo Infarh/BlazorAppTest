@@ -9,8 +9,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Client\BlazorAppTest.Client.csproj" />
-    <ProjectReference Include="..\Shared\BlazorAppTest.Shared.csproj" />
+    <ProjectReference Include="..\..\Common\BlazorAppTest.Domain\BlazorAppTest.Domain.csproj" />
+    <ProjectReference Include="..\..\UI\BlazorAppTest.Client\BlazorAppTest.Client.csproj" />
   </ItemGroup>
 
 
