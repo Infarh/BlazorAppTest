@@ -19,6 +19,7 @@ namespace BlazorAppTest.Server
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<BlazorAppDB>(opt => opt.UseSqlServer(Configuration.GetConnectionString("Default")));
+            services.AddTransient<BlazorAppDBInitializer>();
 
             services.AddScoped<IStudentManager, StudentsManager>();
 
@@ -26,8 +27,10 @@ namespace BlazorAppTest.Server
             services.AddRazorPages();
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, BlazorAppDBInitializer db)
         {
+            db.Initialize();
+            
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
